@@ -1,0 +1,3 @@
+d:/Works/TAIZHI_Z900/SDK_0428_2015/DrvExt/DrvExt_src/ModelExt/Z900/IOCfg.c:340: warning: no previous prototype for 'GPIOMap_ACCDet'
+d:/Works/TAIZHI_Z900/SDK_0428_2015/DrvExt/DrvExt_src/ModelExt/Z900/IOCfg.c:345: warning: no previous prototype for 'GPIOMap_SetSystemOnLine'
+d:/Works/TAIZHI_Z900/SDK_0428_2015/DrvExt/DrvExt_src/ModelExt/Z900/DxInput_Key.c:163: warning: 'VolDet_GetKey2Level' defined but not used

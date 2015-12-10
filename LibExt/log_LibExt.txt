@@ -1,0 +1,3 @@
+e:/TAIZHI_Z900/SDK_0428_2015/LibExt/LibExt_src/DevCamIPL/IPL_OV2710M_TVP5150_CARDV_FFFF/IQS_SettingFlow_OV2710M_TVP5150_CARDV_FFFF.c:1768: warning: no previous prototype for 'IQS_GetBinningFactor'
+e:/TAIZHI_Z900/SDK_0428_2015/LibExt/LibExt_src/DevCamIPL/IPL_OV2710M_TVP5150_CARDV_FFFF/IQS_SettingTable_OV2710M_TVP5150_CARDV_FFFF.c:402: warning: excess elements in array initializer
+e:/TAIZHI_Z900/SDK_0428_2015/LibExt/LibExt_src/DevCamIPL/IPL_OV2710M_TVP5150_CARDV_FFFF/IQS_SettingTable_OV2710M_TVP5150_CARDV_FFFF.c:402: warning: (near initialization for 'IPE_ESymDiff')
