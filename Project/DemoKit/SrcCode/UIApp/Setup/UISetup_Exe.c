@@ -45,7 +45,9 @@ extern ER check_iso(UINT32 addr,UINT32 value,UINT32 Length);
 //#NT#2011/02/15 Steven feng-begin
 extern void Cal_ItemClearStatus(void);
 //#NT#2011/02/15 Steven feng-end
-
+#define PIP_VIEW_ONLY_A        0
+#define PIP_VIEW_ONLY_B        1
+#define PIP_VIEW_A_BIG_B_SMALL 2
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -909,11 +911,28 @@ INT32 SetupExe_OnWifiSetPipStyle(VControl *pCtrl, UINT32 paramNum, UINT32 *param
 {
 #ifdef __ECOS
     debug_msg("%s %d\r\n",__FUNCTION__,paramArray[0]);
-    if(paramNum)
+    /*if(paramNum)
     {
     	debug_msg("SetupExe_OnWifiSetPipStyle\r\n");
         PipView_SetStyle(paramArray[0]);
-    }
+    }*/
+    switch(paramArray[0])
+    {
+    	case PIP_VIEW_ONLY_A:
+			PipView_SetStyle(PIP_STYLE_1T1F);//only A
+    		break;
+				
+		case PIP_VIEW_ONLY_B:
+			PipView_SetStyle(PIP_STYLE_2T2F); //only B
+			break;
+				
+		case PIP_VIEW_A_BIG_B_SMALL:
+			PipView_SetStyle(PIP_STYLE_2T1B2S);//A+B  B small
+			break;
+				
+		default:
+			break;
+    	}
 #endif
     return NVTEVT_CONSUME;
 }
