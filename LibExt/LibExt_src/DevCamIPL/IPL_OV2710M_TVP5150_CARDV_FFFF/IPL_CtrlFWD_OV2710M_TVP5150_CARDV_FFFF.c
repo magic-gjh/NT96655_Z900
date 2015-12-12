@@ -127,10 +127,12 @@ IPH_CLK IPL_SIEClkCBFlowD(void)
 
     {
         clk.SIEclk = 0;
+		DBG_ERR("SIEclk = %d\r\n", clk.SIEclk);
     }
     else if (SenInfo.DataType == SENSOR_DATA_DUMMY)
     {
         clk.SIEclk = 27000000;
+		DBG_ERR("SIEclk = %d\r\n", clk.SIEclk);
     }
     else
     {

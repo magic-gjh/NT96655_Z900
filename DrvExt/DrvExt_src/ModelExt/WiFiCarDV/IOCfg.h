@@ -141,6 +141,7 @@ extern void     GPIOMap_SwitchTV(BOOL bIsSwitch);
 // Wi-Fi power
 #define GPIO_WIFI_POWER_PWM5        P_GPIO_41
 
+
 extern BOOL     SDIOCardUser_CheckCardInserted(void);
 extern BOOL     SDIOCardUser_CheckCardWP(void);
 #if (_INTERSTORAGE_ == _INTERSTORAGE_EMMC_)

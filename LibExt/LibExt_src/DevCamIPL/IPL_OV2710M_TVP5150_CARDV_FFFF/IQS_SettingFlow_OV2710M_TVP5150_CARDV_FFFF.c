@@ -1764,13 +1764,22 @@ UINT32 IQS_CAPPRI_IsRetinexEn(void)
     }
 }
 
-
 void IQS_GetBinningFactor(UINT32 *PrvBin, UINT32 *CapBin)
 {
-    *PrvBin = 0;
-    *CapBin = 0;
-//    DBG_ERR("need to be reviewed\r\n");
+    *CapBin = *PrvBin = 0;
+/*
+    UINT32 ISO, ExpT, Iris;
+    AE_GetPrvAEArg(&ISO, &ExpT, &Iris);
+    if ( ISO > 400 )
+        *PrvBin = 1;
+    else if ( ISO < 200 )
+        *PrvBin = 0;
+    else
+        *PrvBin = IfeBinning;
+    *CapBin = *PrvBin;
+    */
 }
+
 
 void WDR_VideoGainAdjust(SceneRender_RTXGainInfo* GetRtxGainInfo)
 {

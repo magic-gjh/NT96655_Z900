@@ -114,8 +114,8 @@ extern UINT32 SR_CalLCABufferSize(SceneRenderImageInfo *pImgInfo);
 extern ER SR_ProcessYccLCA(SceneRenderImageInfo *pImgInfo, UINT32 uiFilterTimes);
 
 
+//extern ER SR_CalRTXGain(SceneRender_RTXCalInfo *pCalRtxInfo, SceneRender_RTXGainInfo *pGetRtxGainInfo);
 extern ER SR_CalRTXGain(SceneRender_RTXCalInfo *pCalRtxInfo, SceneRender_RTXGainInfo *pGetRtxGainInfo);
-
 #endif
 
 

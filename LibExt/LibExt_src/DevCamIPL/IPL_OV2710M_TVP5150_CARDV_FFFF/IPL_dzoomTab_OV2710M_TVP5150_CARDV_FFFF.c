@@ -171,7 +171,9 @@ const UINT32 VDOZOOM_OV2710M_INFOR_MODE_4_TABLE[31][DZOOM_ITEM_MAX] =
 UINT32* SenMode2Tbl(IPL_PROC_ID Id, UINT32 SenMode, UINT32 *DzMaxidx)
 {
     UINT32 *Ptr = NULL;
-
+	debug_msg("^GKENPHY SENMODE:%d   %d\r\n",Id, SenMode);
+	
+	//SenMode = SENSOR_MODE_1;
     if (Id == IPL_ID_1)
     {
         switch(SenMode)

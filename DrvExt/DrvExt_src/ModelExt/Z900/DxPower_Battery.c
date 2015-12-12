@@ -227,7 +227,9 @@ static UINT32 DrvPower_GetBatteryLevel(void)
         uiEmptycount++;
         if (uiEmptycount >= 15)
         {
-            return DRVPWR_BATTERY_LVL_EMPTY;
+        	//debug_msg("DRVPWR_BATTERY_LVL_EMPTY\r\n");
+            //return DRVPWR_BATTERY_LVL_EMPTY;
+            return DRVPWR_BATTERY_LVL_4;
         }
     }
 

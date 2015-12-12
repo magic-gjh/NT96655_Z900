@@ -29,7 +29,7 @@
 char gFWExternalVersion[33]=FW_VERSION_NUM;
 char* Prj_GetVersionString()
 {
-    return gFWExternalVersion;
+     return gFWExternalVersion;
 }
 
 

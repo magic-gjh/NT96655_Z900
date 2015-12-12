@@ -18,6 +18,7 @@
 #include "UIFlow.h"
 #include "UIAppNetwork.h"
 #include "RawEncAPI.h"
+#include "PipView.h"
 
 #define THIS_DBGLVL         2 //0=OFF, 1=ERROR, 2=TRACE
 ///////////////////////////////////////////////////////////////////////////////
@@ -44,6 +45,10 @@ p2p_uuid:用戶p2p標誌,沒有可以不填 ""
 #define FAT_GET_SEC_FROM_TIME(x)     (x & 0x001F)<<1         ///<  seconds(2 seconds / unit)
 #define FAT_GET_MIN_FROM_TIME(x)     (x & 0x07E0)>>5         ///<  Minutes
 #define FAT_GET_HOUR_FROM_TIME(x)    (x & 0xF800)>>11        ///<  hours
+
+#define PIP_VIEW_ONLY_A        0
+#define PIP_VIEW_ONLY_B        1
+#define PIP_VIEW_A_BIG_B_SMALL 2
 
 void XML_StringResult(UINT32 cmd,char *str,cyg_uint32 bufAddr, cyg_uint32* bufSize, char* mimeType);
 void XML_ValueResult(UINT32 cmd,UINT64 value,cyg_uint32 bufAddr, cyg_uint32* bufSize, char* mimeType);
@@ -1342,5 +1347,29 @@ int WifiCmd_getQueryData(char* path, char* argument, cyg_uint32 bufAddr, cyg_uin
     }
     return CYG_HFS_CB_GETDATA_RETURN_OK;
 
+}
+int XML_SetPip_Style(char* path, char* argument, cyg_uint32 bufAddr, cyg_uint32* bufSize, char* mimeType, cyg_uint32 segmentCount)
+{
+	UINT8 ucSetPipStyle = 3;
+
+    switch(ucSetPipStyle)
+    {
+    	case PIP_VIEW_ONLY_A:
+			PipView_SetStyle(PIP_STYLE_1T1F);//only A
+    		break;
+				
+		case PIP_VIEW_ONLY_B:
+			PipView_SetStyle(PIP_STYLE_2T2F); //only B
+			break;
+				
+		case PIP_VIEW_A_BIG_B_SMALL:
+			PipView_SetStyle(PIP_STYLE_2T1B2S);//A+B  B small
+			break;
+				
+		default:
+			break;
+    	}
+
+    return CYG_HFS_CB_GETDATA_RETURN_OK;
 }
 #endif

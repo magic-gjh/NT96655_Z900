@@ -911,6 +911,7 @@ INT32 SetupExe_OnWifiSetPipStyle(VControl *pCtrl, UINT32 paramNum, UINT32 *param
     debug_msg("%s %d\r\n",__FUNCTION__,paramArray[0]);
     if(paramNum)
     {
+    	debug_msg("SetupExe_OnWifiSetPipStyle\r\n");
         PipView_SetStyle(paramArray[0]);
     }
 #endif

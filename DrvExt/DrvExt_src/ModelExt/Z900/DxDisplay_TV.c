@@ -627,7 +627,7 @@ static UINT32 VolDet_GetTVDetADC(void)
 
 BOOL GPIOMap_DetTV(void)
 {
-//return TRUE;
+    return TRUE;//FALSE;
 #if (TV_DET_CTRL == TV_DET_DUMMY)
     return FALSE;
 #endif

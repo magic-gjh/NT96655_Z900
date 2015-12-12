@@ -297,21 +297,20 @@ SENSOR_INIT_OBJ DrvSensor_GetObj1st(void)
     InitObj.PclkInfo.bSieMClkEn = ENABLE;
     InitObj.PclkInfo.uiMClkSrc = PLL_CLKSRC_PLL5;
     InitObj.PclkInfo.uiMClkFreq = 24000000;
-    debug_msg("OV2710M DrvSensor_GetObj1st..\r\n");	
-    gpio_clearPin(GPIO_SENSOR_PDN);  //SN2.8
-    Delay_DelayMs(20);
-    //reset
-    
-    gpio_clearPin(GPIO_SENSOR_RESET);
-    Delay_DelayMs(100);
-    gpio_setPin(GPIO_SENSOR_RESET);
-    Delay_DelayMs(100);
 
-    //gpio_clearPin(GPIO_SENSOR2_PDN);
-    //Delay_DelayMs(1);
-    //gpio_setPin(GPIO_SENSOR2_PDN);	
-    //Delay_DelayMs(1);
-	
+    //power-
+	    debug_msg("S600 ------------------ >>>>> Sensor_GetDrvTab_TVP5150 \r\n");
+
+    //gpio_clearPin(GPIO_SENSOR_PDN);  //SN2.8
+    Delay_DelayMs(20);
+
+
+    //reset
+    gpio_clearPin(GPIO_SENSOR_RESET);
+    Delay_DelayMs(20);
+    gpio_setPin(GPIO_SENSOR_RESET);
+    Delay_DelayMs(20);
+
     return InitObj;
 }
 #elif (_SENSORLIB_ == _SENSORLIB_CMOS_IMX322LQJ_)
@@ -496,12 +495,11 @@ void DrvSensor_TurnOnPower(void)
 #elif(_SENSORLIB2_ == _SENSORLIB2_CMOS_TVP5150_)
 void DrvSensor_TurnOnPower(void)
 {
-    
- //   gpio_setDir(GPIO_SENSOR_RESET, GPIO_DIR_OUTPUT);
- //   gpio_setPin(GPIO_SENSOR_RESET);
-
- //   gpio_setDir(GPIO_SENSOR2_RESET, GPIO_DIR_OUTPUT);
- //   gpio_setPin(GPIO_SENSOR2_RESET);	
+    //pll_setPLLEn(PLL_ID_5, DISABLE);
+    //pll_setClkEn(PLL_CLK_SIEMCLK, FALSE);
+    //pll_setPLL(PLL_ID_5, 2949120);// 270 MHz : 270=12*2949120>>17
+    //pll_setPLLEn(PLL_ID_5, ENABLE);
+    //pll_setClkEn(PLL_CLK_SIEMCLK, TRUE);
     gpio_setPin(GPIO_SENSOR2_POWER_EN);
     Delay_DelayMs(1);
     gpio_clearPin(GPIO_SENSOR2_PDN);
@@ -513,10 +511,6 @@ void DrvSensor_TurnOnPower(void)
     gpio_setPin(GPIO_SENSOR2_RESET);
 
     DBG_ERR("------------PDN=%d\r\n",gpio_getPin(GPIO_SENSOR2_PDN));
-    //gpio_setDir(GPIO_SENSOR2_PDN, GPIO_DIR_OUTPUT);
-    //gpio_clearPin(GPIO_SENSOR2_PDN);
-	
-   // debug_msg("------------PDN=%d\r\n",gpio_getPin(GPIO_SENSOR2_PDN));
 }
 #else
 void DrvSensor_TurnOnPower(void)
@@ -558,9 +552,6 @@ void DrvSensor_TurnOffPower(void)
 #else
 void DrvSensor_TurnOffPower(void)
 {
-    DBG_IND("[PWRIC] - sensor close\r\n");
-    gpio_clearPin(GPIO_SENSOR_RESET);
-  //  gpio_clearPin(GPIO_SENSOR_STANDBY);
 }
 #endif
 
@@ -575,12 +566,6 @@ void DrvSensor_PowerSaveOff(void)
 #else
 void DrvSensor_PowerSaveOff(void)
 {
-    //pll_enableClock(SIE_MCLK);
-//    gpio_setDir(GPIO_SENSOR_STANDBY, GPIO_DIR_OUTPUT);
-//    gpio_setPin(GPIO_SENSOR_STANDBY);
-
-    gpio_setDir(GPIO_SENSOR_RESET, GPIO_DIR_OUTPUT);
-    gpio_setPin(GPIO_SENSOR_RESET);
 }
 #endif
 
@@ -595,15 +580,14 @@ void DrvSensor_PowerSaveOn(void)
 #else
 void DrvSensor_PowerSaveOn(void)
 {
-    gpio_clearPin(GPIO_SENSOR_RESET);
-    gpio_clearPin(GPIO_SENSOR_STANDBY);
+
 }
 #endif
 
 #if(_SENSORLIB2_ == _SENSORLIB2_CMOS_TVP5150_)
 BOOL DrvSensor_Det2ndSensor(void)
 {
-    return TRUE;//return gpio_getPin(GPIO_SENSOR2_DET)?FALSE:TRUE;
+    return TRUE;
 }
 #else
 BOOL DrvSensor_Det2ndSensor(void)

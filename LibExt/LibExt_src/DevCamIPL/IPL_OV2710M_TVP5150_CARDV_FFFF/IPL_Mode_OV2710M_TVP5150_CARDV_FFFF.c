@@ -171,6 +171,7 @@ static IPLBUF_RST IPL_Init_Proc(IPL_PROC_ID Id, IPL_CHGMODE_DATA *ChgMode, IPL_C
         IPL_SetImePathInfo(ChgMode->Id, IPL_IME_PATH3, &PathInfo3);
     }
     IPL_CtrlInitPrvIpcInfo(Id, IpcInfo, IsrObjInfo, ChgMode);
+	debug_msg("IPL_Init_Proc \r\n");
     IPL_ResetDisplayCtrlFlow();
     return BufRst;
 }
@@ -220,6 +221,7 @@ static IPLBUF_RST IPL_Init_Proc_CCIR(IPL_PROC_ID Id, IPL_CHGMODE_DATA *ChgMode, 
     BufRst = IPL_BufAssign(IPL_MapICF2BufMode(IPL_CtrlGetInfor(Id, IPLCTRL_PRVFLOW)), &BufInfo);
     IPL_CtrlInitPrvPProcInfo(Id, ChgMode->FuncEn);
     IPL_CtrlInitPrvIpcInfo_CCIR(Id, IpcInfo, IsrObjInfo, ChgMode);
+	debug_msg("IPL_Init_Proc \r\n");
     IPL_ResetDisplayCtrlFlow2();
     return BufRst;
 }
@@ -328,7 +330,9 @@ static ER IPL_Vid2Rec(IPL_CHGMODE_DATA *ChgMode, IPL_CHGMODE_DATA *PrvMode)
             BufRst.er_code = E_OK;
             if (ChgMode->ProcSenId[IPL_ID_2] != SENSOR_ID_NONE)
             {
+            	debug_msg("magic_20151212_8\r\n");
                 BufRst = IPL_Init_Proc_CCIR(IPL_ID_2, ChgMode, PrvMode, &IsrObjInfo, &IpcInfo, &AeObj, &AwbObj, &AfObj, FALSE);
+				debug_msg("magic_20151212_1\r\n");
                 //IPL_BufDump(IPL_ID_2);
             }
             UsedSize += BufRst.BufSize;
@@ -418,7 +422,9 @@ static ER IPL_Rec2Vid(IPL_CHGMODE_DATA *ChgMode, IPL_CHGMODE_DATA *PrvMode)
             BufRst.er_code = E_OK;
             if (ChgMode->ProcSenId[IPL_ID_2] != SENSOR_ID_NONE)
             {
+            	debug_msg("magic_20151212_2\r\n");
                 BufRst = IPL_Init_Proc_CCIR(IPL_ID_2, ChgMode, PrvMode, &IsrObjInfo, &IpcInfo, &AeObj, &AwbObj, &AfObj, FALSE);
+				debug_msg("magic_20151212_3\r\n");
                 //IPL_BufDump(IPL_ID_2);
             }
             UsedSize += BufRst.BufSize;
@@ -489,14 +495,16 @@ static ER IPL_Off2Prv(IPL_CHGMODE_DATA *ChgMode, IPL_CHGMODE_DATA *PrvMode)
             BufRst.er_code = E_OK;
             if (ChgMode->ProcSenId[IPL_ID_2] != SENSOR_ID_NONE)
             {
+            	debug_msg("magic_20151212_4\r\n");
                 BufRst = IPL_Init_Proc_CCIR(IPL_ID_2, ChgMode, PrvMode, &IsrObjInfo, &IpcInfo, &AeObj, &AwbObj, &AfObj, FALSE);
+				debug_msg("magic_20151212_5\r\n");
                 //IPL_BufDump(IPL_ID_2);
             }
             UsedSize += BufRst.BufSize;
 
             ChgMode->BufAddr = OrgAddr;
             ChgMode->BufSize = UsedSize;
-
+			debug_msg("magic_20151212_12\r\n");
             if (ChgMode->ProcSenId[IPL_ID_1] != SENSOR_ID_NONE)
             {
                 //open AE & AWB
@@ -504,26 +512,32 @@ static ER IPL_Off2Prv(IPL_CHGMODE_DATA *ChgMode, IPL_CHGMODE_DATA *PrvMode)
                 AwbObj.ProcNum = 1;
                 AE_Open(&AeObj);
                 AWB_Open(&AwbObj);
-
+				debug_msg("magic_20151212_9\r\n");
                 //trigger AE & AWB
-                AE_Start(IPL_UTI_CONV2_AE_ID(IPL_ID_1), TRUE);
+                AE_Start(IPL_UTI_CONV2_AE_ID(IPL_ID_1), FALSE);
+				debug_msg("magic_20151212_10\r\n");
                 AWB_Start(IPL_UTI_CONV2_AWB_ID(IPL_ID_1), TRUE);
+				debug_msg("magic_20151212_11\r\n");
                 IsrObjInfo.ProcNum = 1;
             }
+			debug_msg("magic_20151212_13\r\n");
         }
     }
     else
     {
         //only one sensor
     }
-
+	debug_msg("magic_20151212_14\r\n");
     IPL_CTRLRun2(ICF_FLOW_D, &IpcInfo, &IsrObjInfo, IPL_CtrlPostImage, IPL_CtrlPostImage2);
+	debug_msg("magic_20151212_15\r\n");
     IPC_WaitImeFMD(TRUE);
-
+	debug_msg("magic_20151212_16\r\n");
     IPL_CBMsgProc(IPL_CBMSG_PREVIEW, NULL);
-
+	debug_msg("magic_20151212_17\r\n");
     AE_WaitStable(3);
+	debug_msg("magic_20151212_18\r\n");
     IPL_CBMsgProc(IPL_CBMSG_PREVIEWSTABLE, NULL);
+	debug_msg("magic_20151212_19\r\n");
     return E_OK;
 }
 
@@ -723,7 +737,9 @@ static ER IPL_Cap2Prv(IPL_CHGMODE_DATA *ChgMode, IPL_CHGMODE_DATA *PrvMode)
             BufRst.er_code = E_OK;
             if (ChgMode->ProcSenId[IPL_ID_2] != SENSOR_ID_NONE)
             {
+            	debug_msg("magic_20151212_6\r\n");
                 BufRst = IPL_Init_Proc_CCIR(IPL_ID_2, ChgMode, PrvMode, &IsrObjInfo, &IpcInfo, &AeObj, &AwbObj, &AfObj, FALSE);
+				debug_msg("magic_20151212_7\r\n");
                 //IPL_BufDump(IPL_ID_2);
             }
             UsedSize += BufRst.BufSize;

@@ -90,7 +90,7 @@
 #if (CARDV_ON_MEDIA_BOX_DEMO ==ENABLE)
 #define AUTO_WIFI                       ENABLE//ENABLE
 #else
-#define AUTO_WIFI                       DISABLE
+#define AUTO_WIFI                       ENABLE
 #endif
 
 #define IP_LIMITE                       DISABLE

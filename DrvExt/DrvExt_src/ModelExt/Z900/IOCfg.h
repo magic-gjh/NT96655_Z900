@@ -26,6 +26,11 @@
 #include "adc.h"
 #include "pwm.h"
 
+#define IO_CONFIG_PRJ_M             0
+#define IO_CONFIG_PRJ_P             1
+#define IO_CONFIG_PRJ_J             2
+#define IO_CONFIG_PRJ               IO_CONFIG_PRJ_P
+
 #define USE_VIO DISABLE
 
 #if (USE_VIO == ENABLE)
@@ -75,7 +80,7 @@ typedef struct _GPIO_INIT_OBJ{
 #define LCD_COMM_CTRL               LCD_COMM_BY_GPIO //EVB
 #if (LCD_COMM_CTRL == LCD_COMM_BY_GPIO)
 #define GPIO_LCD_SIF_SEN            L_GPIO_20 //EVB
-#define GPIO_LCD_SIF_SCK            L_GPIO_21//L_GPIO_27 //EVB
+#define GPIO_LCD_SIF_SCK            L_GPIO_21 //EVB
 #define GPIO_LCD_SIF_SDA            L_GPIO_22 //EVB
 #endif
 #if (LCD_COMM_CTRL == LCD_COMM_BY_SIF)
@@ -85,7 +90,6 @@ typedef struct _GPIO_INIT_OBJ{
 #define PAD_LCD_SIF_SDA             PAD_PIN_xGPIOx
 #endif
 //#define GPIO_LCD_SLEEP              87 //EVB not support
-//#define GPIO_LCD_RESET              88 //EVB not support
 
 // LCD backlight
 #define LCD_BACKLIGHT_DUMMY         0
@@ -96,10 +100,10 @@ typedef struct _GPIO_INIT_OBJ{
 #if (LCD_BACKLIGHT_CTRL == LCD_BACKLIGHT_BY_PWM)
 #define GPIO_PWM_BLG_PCTL           x
 #define PWMID_BLG_PCTL              PWMID_x
+#define GPIO_LCD_RESET              0xFFFFFFFF // dummy pin
 #elif (LCD_BACKLIGHT_CTRL == LCD_BACKLIGHT_BY_GPIO)
-#define GPIO_LCD_BLG_PCTL           P_GPIO_9
-#define PAD_LCD_BLG_PCTL            PAD_PIN_PGPIO9
-#define GPIO_LCD_RESET              L_GPIO_27// P_GPIO_36 //PWM0, no use
+#define GPIO_LCD_BLG_PCTL           P_GPIO_40
+#define PAD_LCD_BLG_PCTL            PAD_PIN_PGPIO40
 #endif
 
 // TV
@@ -243,14 +247,14 @@ extern BOOL     GPIOMap_DetPoweroff(void);
 #define LED_RED_DUMMY               0
 #define LED_RED_BY_GPIO             1
 #define LED_RED_CTRL                LED_RED_BY_GPIO
-#define GPIO_RED_LED                L_GPIO_14
-#define PAD_RED_LED                 PAD_PIN_LGPIO14
+#define GPIO_RED_LED                D_GPIO_1
+#define PAD_RED_LED                 PAD_PIN_DGPIO1
 
 #define LED_GREEN_DUMMY             0
 #define LED_GREEN_BY_GPIO           1
 #define LED_GREEN_CTRL              LED_GREEN_BY_GPIO
-#define GPIO_GREEN_LED              P_GPIO_7
-#define PAD_GREEN_LED               PAD_PIN_PGPIO7
+#define GPIO_GREEN_LED              L_GPIO_15
+#define PAD_GREEN_LED               PAD_PIN_LGPIO15
 
 #define LED_FOCUS_DUMMY             0
 #define LED_FOCUS_BY_GPIO           1
@@ -279,38 +283,16 @@ extern char*    VolDet_GetStatusString(void);
 // Sensor device
 //--------------------------------------------------------------------
 // Sensor
-#define GPIO_SENSOR_PDN            P_GPIO_39
-#define GPIO_SENSOR_RESET          P_GPIO_46 //S_GPIO_26
+#define GPIO_SENSOR_RESET           P_GPIO_46//S_GPIO_26
 #define GPIO_SENSOR_STANDBY         D_GPIO_6
 #define GPIO_SENSOR_PWM0            P_GPIO_36
 #define GPIO_SENSOR_PWM1            P_GPIO_37
 #define GPIO_SENSOR_PWM2            P_GPIO_38
-
 #define GPIO_SENSOR_PWM5            P_GPIO_41
 #define GPIO_SENSOR2_RESET          P_GPIO_56
-#define GPIO_SENSOR2_PDN             P_GPIO_45//S_GPIO_25
-#define GPIO_SENSOR2_POWER_EN       P_GPIO_40
-#define GPIO_SENSOR2_DET         P_GPIO_55
-#define PAD_SENSOR2_DET                  PAD_PIN_PGPIO55
-// CCD
-/*
-typedef enum
-{
-    CCD_PWR_STATUS_OFF = 0,
-    CCD_PWR_STATUS_ON,
-    CCD_PWR_STATUS_SLEEP,
-    CCD_PWR_STATUS_MAXIDX
-}CCD_PWR_STATUS;
-*/
-/*
-#define GPIO_CCDTG_VH               L_GPIO_20
-#define GPIO_CCDTG_VL               L_GPIO_19
-//#define GPIO_CCDTG_VH_2             50
-#define GPIO_CCDTG_RST              C_GPIO_22
-//#define GPIO_CCDTG_HDRV_EN          88
-#define SIF_SENSOR_TG               SIF_CH2
-#define SIF_SENSOR_AFE              SIF_CH3
-*/
+#define GPIO_SENSOR2_PDN            P_GPIO_45//S_GPIO_25
+#define GPIO_SENSOR2_POWER_EN       P_GPIO_39
+
 extern void     GPIOMap_TurnOnCCDPower(void);
 extern void     GPIOMap_TurnOffCCDPower(void);
 extern UINT8    GPIOMap_IsCCDPowerOn(void);

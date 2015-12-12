@@ -92,7 +92,6 @@ extern void IPL_FreezeDisplayImage(BOOL OnOFF);
 */
 extern UINT32 IPL_GetDisplayCtrlBufferNum(void);
 
-
 /**
     Assign buffer address to specified buffer
 

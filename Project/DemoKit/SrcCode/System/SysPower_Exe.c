@@ -253,7 +253,9 @@ void UI_DetBattery(void)
          if (GxUSB_GetConnectType() == USB_CONNECT_CHARGER)
          {
             Ux_PostEvent(NVTEVT_BATTERY, 0);
-         } else {
+         } 
+		 else 
+		 {
             // normal battery detect case
             GxPower_DetBattery();
          }

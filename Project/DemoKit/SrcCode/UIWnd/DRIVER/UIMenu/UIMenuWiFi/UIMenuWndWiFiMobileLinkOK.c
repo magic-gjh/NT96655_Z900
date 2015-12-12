@@ -553,7 +553,7 @@ INT32 UIMenuWndWiFiMobileLinkOK_OnExePipStyle(VControl *pCtrl, UINT32 paramNum, 
     UINT32 Data = 0;
     if(paramNum)
         Data = paramArray[0];
-
+	debug_msg("UIMenuWndWiFiMobileLinkOK_OnExePipStyle: Data = %d\r\n",Data);
     Ux_SendEvent(0,NVTEVT_EXE_WIFI_SET_PIP_STYLE, 1, Data);
     return NVTEVT_CONSUME;
 }
