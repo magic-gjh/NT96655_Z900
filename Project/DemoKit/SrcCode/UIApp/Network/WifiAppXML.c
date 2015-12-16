@@ -902,7 +902,7 @@ int XML_FileList(char* path, char* argument, cyg_uint32 bufAddr, cyg_uint32* buf
     buf+=len;
     *bufSize = (cyg_uint32)(buf)-bufAddr;
 
-    if(System_GetState(SYS_STATE_CURRMODE)!=PRIMARY_MODE_PLAYBACK)
+    if(System_GetState(SYS_STATE_CURRMODE)!= PRIMARY_MODE_PLAYBACK)
     {
         FileDB_Release(FileDBHandle);
     }

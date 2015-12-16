@@ -52,7 +52,7 @@ void System_OnAudioInit(void)
         if (E_OK == GxSound_InitAudio())
         {
             GxSound_Open();
-        }	
+        }
     }
     //PHASE-2 : Init & Open Lib or LibExt
     {

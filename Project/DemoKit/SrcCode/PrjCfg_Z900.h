@@ -114,10 +114,10 @@
 
 //..............................................................................
 // Date-Time Config
-#define DEF_YEAR                        2014
+#define DEF_YEAR                        2015
 #define DEF_MONTH                       1
 #define DEF_DAY                         1
-#define MIN_YEAR                        2000
+#define MIN_YEAR                        2015
 #define MAX_YEAR                        2050
 
 //..............................................................................

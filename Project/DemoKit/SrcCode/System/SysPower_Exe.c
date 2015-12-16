@@ -79,7 +79,7 @@ SX_TIMER_ITEM(GxPower_DetBatteryIns, UI_DetBatteryInsert, 25, TRUE)
 BOOL System_Is_USBPC_DeadBattery(void);
 #endif
 
-SX_TIMER_ITEM(System_OnLine, System_OnLine, 50, TRUE)
+SX_TIMER_ITEM(System_OnLine, System_OnLine, 4, TRUE)
 
 UINT32 DxPower_CB(UINT32 event, UINT32 param1, UINT32 param2)
 {
@@ -361,7 +361,7 @@ INT32 System_OnPwrChargeSuspend(VControl *pCtrl, UINT32 paramNum, UINT32 *paramA
 INT32 System_OnPwrChargeResume(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArray)
 {
     //GxLED_SetCtrl(KEYSCAN_LED_GREEN,TURNON_LED,FALSE);
-    GxLED_SetCtrl(KEYSCAN_LED_GREEN,SETLED_SPEED,GXLED_1SEC_LED_TOGGLE_CNT);
+    //GxLED_SetCtrl(KEYSCAN_LED_GREEN,SETLED_SPEED,GXLED_1SEC_LED_TOGGLE_CNT);
     GxLED_SetCtrl(KEYSCAN_LED_GREEN,SET_TOGGLE_LED,TRUE);
     return NVTEVT_CONSUME;
 }
@@ -431,7 +431,7 @@ void Power_StartUSBCharge(void)
 #endif
     //GxLED_SetCtrl(KEYSCAN_LED_RED,SETLED_SPEED,GXLED_1SEC_LED_TOGGLE_CNT);
     //GxLED_SetCtrl(KEYSCAN_LED_RED,SET_TOGGLE_LED,TRUE);
-    GxLED_SetCtrl(KEYSCAN_LED_GREEN,SETLED_SPEED,GXLED_1SEC_LED_TOGGLE_CNT);
+    //GxLED_SetCtrl(KEYSCAN_LED_GREEN,SETLED_SPEED,GXLED_1SEC_LED_TOGGLE_CNT);
     GxLED_SetCtrl(KEYSCAN_LED_GREEN,SET_TOGGLE_LED,TRUE);
 
     // disable flash re-charge
@@ -512,9 +512,70 @@ void Power_StopUSBCharge(void)
 
 void System_OnLine()
 {
-	static BOOL En=FALSE;
-	GPIOMap_SetSystemOnLine(En);
-	En!=En;
+	static UINT8 Flag = 0;	
+	
+	//debug_msg("Flag = %d\r\n",Flag);
+	if(Flag == 1)
+	{
+		GPIOMap_SetSystemOnLine(1);
+		Flag = 0;
+	}
+	else
+	{
+		GPIOMap_SetSystemOnLine(0);
+		Flag = 1;
+	}
 }
+#if 0
+void UI_DetLEDStatus(void)
+{
+    static UINT32 uiRedLedIsToggle=FALSE;
 
+    //debug_msg("card:%d, wifi link:%d, record status:%d, wifi power:%d\r\n",UI_GetData(FL_CardStatus),UI_GetData(FL_WIFI_LINK),UIFlowWndWiFiMovie_GetStatus(),GPIOMap_GetWifiPower());	
+   
+    if (UI_GetData(FL_CardStatus) == CARD_REMOVED)
+    {
+      	/* TURNON_LED when card removed */
+    	GxLED_SetCtrl(KEYSCAN_LED_GREEN,TURNON_LED,TRUE);
+		
+    }
+    else
+    {
+           /*          
+	 	   		SET_TOGGLE_LED when recording
+	 	   		
+	 	   	*/
+	 	
+	 	if(UI_GetData(FL_WIFI_LINK) == WIFI_LINK_OK)
+	 	{
+			if(UIFlowWndWiFiMovie_GetStatus() == WIFI_MOV_ST_RECORD)
+			{
+				GxLED_SetCtrl(KEYSCAN_LED_GREEN,SET_TOGGLE_LED,TRUE); 	
+			}		
+			else 
+			{
+				GxLED_SetCtrl(KEYSCAN_LED_GREEN,SET_TOGGLE_LED,FALSE);
+				GxLED_SetCtrl(KEYSCAN_LED_GREEN,TURNON_LED,TRUE); 	
+			}			
+		}
+		else
+	 	{
+			switch(gMovData.State)	
+			{
+				case MOV_ST_REC:
+				case MOV_ST_REC|MOV_ST_ZOOM:
+					GxLED_SetCtrl(KEYSCAN_LED_GREEN,SET_TOGGLE_LED,TRUE); 					
+				break;
+					GxLED_SetCtrl(KEYSCAN_LED_GREEN,SET_TOGGLE_LED,FALSE);
+					GxLED_SetCtrl(KEYSCAN_LED_GREEN,TURNON_LED,TRUE); 
+				default:
+					
+				break;
+			}
+		
+		}			
+			
+    }
+}
+#endif
 

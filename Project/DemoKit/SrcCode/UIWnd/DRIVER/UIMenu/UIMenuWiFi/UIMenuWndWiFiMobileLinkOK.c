@@ -170,7 +170,7 @@ INT32 UIMenuWndWiFiMobileLinkOK_OnOpen(VControl *pCtrl, UINT32 paramNum, UINT32 
         Ux_PostEvent(NVTEVT_SYSTEM_MODE, 1, PRIMARY_MODE_MOVIE);
     }
 	
-    GxLED_SetCtrl(KEYSCAN_LED_GREEN,SETLED_SPEED,50);
+    //GxLED_SetCtrl(KEYSCAN_LED_GREEN,SETLED_SPEED,50);
     GxLED_SetCtrl(KEYSCAN_LED_GREEN,SET_TOGGLE_LED,TRUE);
 	
     WifiCmd_ReceiveCmd(TRUE);

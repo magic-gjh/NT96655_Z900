@@ -587,8 +587,33 @@ void DrvSensor_PowerSaveOn(void)
 #if(_SENSORLIB2_ == _SENSORLIB2_CMOS_TVP5150_)
 BOOL DrvSensor_Det2ndSensor(void)
 {
+#if 0
+	SENSOR_INIT_OBJ SenObj;
+	SENSOR_DRVTAB *SenTab;
+	SENSOR_CMD SenCmd;
+	SenObj = DrvSensor_GetObj2nd();
+	SenTab = DrvSensor_GetTab2nd();
+	Sensor_Open(SENSOR_ID_2, &SenObj, SenTab);
+	SenCmd.uiAddr = 0x88;  //Bit13:Trig OB to auto calibration
+	SenCmd.uiDataLen = 1;
+	Sensor_ReadReg(SENSOR_ID_2, &SenCmd);		
+	//debug_msg("SenCmd.uiData[0]:%x..\r\n",SenCmd.uiData[0]&0x10);	
+	
+	if((SenCmd.uiData[0]&0x10)==0x00)
+	{
+		return TRUE;
+	}
+	else
+	{
+		Sensor_Close(SENSOR_ID_2);	
+		return FALSE;
+	}
+#else
     return TRUE;
+#endif
 }
+
+
 #else
 BOOL DrvSensor_Det2ndSensor(void)
 {

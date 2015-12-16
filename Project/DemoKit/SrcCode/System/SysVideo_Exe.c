@@ -132,6 +132,7 @@ void System_OnVideoInit(void)
         #endif
 
         //5.µù¥USxCmdªA°È ---------> Cmd Function
+
         //config video Output
         cDispDev = gDevLCDObj;
         GxVideo_OpenDevice(DOUT1, (UINT32)cDispDev, DISP_LASTMODE);//open LCD first
@@ -140,6 +141,7 @@ void System_OnVideoInit(void)
         //config video Direct
         Display_DetLCDDir();
         #endif
+
         Ux_PostEvent(NVTEVT_VIDEO_ATTACH, 1, 1); // attach
 
         #if (TVINSERT_FUNCTION == ENABLE)
@@ -179,7 +181,6 @@ void System_OnVideoInit(void)
     {
         ISIZE             DeviceSize;
         //Init Display
-
         DeviceSize = GxVideo_GetDeviceSize(DOUT1); //Get LCD size
         GxDisplay_Init(DOUT1, DeviceSize.w, DeviceSize.h);
         DeviceSize = GxVideo_GetDeviceSize(DOUT2); //Get LCD size

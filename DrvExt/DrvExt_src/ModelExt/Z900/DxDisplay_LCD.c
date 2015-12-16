@@ -676,7 +676,7 @@ void GPIOMap_TurnOnLCDBacklight(void)
         pwm_pwmConfig(PWMID_BLG_PCTL, &g_LCDBacklightPWMInfo);
         pwm_pwmEnable(PWMID_BLG_PCTL);
 #elif (LCD_BACKLIGHT_CTRL == LCD_BACKLIGHT_BY_GPIO)
-        gpio_setPin(GPIO_LCD_BLG_PCTL);
+        //gpio_setPin(GPIO_LCD_BLG_PCTL);
 #endif
         g_LCDBacklightEn = TRUE;
     }
@@ -720,7 +720,7 @@ void GPIOMap_TurnOffLCDBacklight(void)
         pwm_pwmDisable(PWMID_BLG_PCTL);
         pwm_close(PWMID_BLG_PCTL, TRUE);
 #elif (LCD_BACKLIGHT_CTRL == LCD_BACKLIGHT_BY_GPIO)
-        gpio_clearPin(GPIO_LCD_BLG_PCTL);
+        //gpio_clearPin(GPIO_LCD_BLG_PCTL);
 #endif
         g_LCDBacklightEn = FALSE;
     }

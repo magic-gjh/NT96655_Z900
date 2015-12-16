@@ -1,0 +1,6 @@
+e:/workspace/NT96655_Z900/DrvExt/DrvExt_src/ModelExt/Z900/IOCfg.c:340: warning: no previous prototype for 'GPIOMap_ACCDet'
+e:/workspace/NT96655_Z900/DrvExt/DrvExt_src/ModelExt/Z900/IOCfg.c:345: warning: no previous prototype for 'GPIOMap_SetSystemOnLine'
+e:/workspace/NT96655_Z900/DrvExt/DrvExt_src/ModelExt/Z900/DxInput_Key.c:163: warning: 'VolDet_GetKey2Level' defined but not used
+e:/workspace/NT96655_Z900/DrvExt/DrvExt_src/ModelExt/Z900/DxCamera_Sensor.c: In function 'DrvSensor_GetTab1st':
+e:/workspace/NT96655_Z900/DrvExt/DrvExt_src/ModelExt/Z900/DxCamera_Sensor.c:75: warning: implicit declaration of function 'Sensor_GetDrvTab_OV2710M'
+e:/workspace/NT96655_Z900/DrvExt/DrvExt_src/ModelExt/Z900/DxCamera_Sensor.c:75: warning: return makes pointer from integer without a cast

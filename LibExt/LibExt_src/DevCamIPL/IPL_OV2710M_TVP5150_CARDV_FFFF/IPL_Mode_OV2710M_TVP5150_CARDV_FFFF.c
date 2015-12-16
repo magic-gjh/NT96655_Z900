@@ -514,7 +514,7 @@ static ER IPL_Off2Prv(IPL_CHGMODE_DATA *ChgMode, IPL_CHGMODE_DATA *PrvMode)
                 AWB_Open(&AwbObj);
 				debug_msg("magic_20151212_9\r\n");
                 //trigger AE & AWB
-                AE_Start(IPL_UTI_CONV2_AE_ID(IPL_ID_1), FALSE);
+                AE_Start(IPL_UTI_CONV2_AE_ID(IPL_ID_1), TRUE);
 				debug_msg("magic_20151212_10\r\n");
                 AWB_Start(IPL_UTI_CONV2_AWB_ID(IPL_ID_1), TRUE);
 				debug_msg("magic_20151212_11\r\n");

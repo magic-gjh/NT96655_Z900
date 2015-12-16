@@ -1257,7 +1257,7 @@ EVENT_ENTRY UISetupObjCmdMap[] =
     {NVTEVT_EXE_WIFI_START,          SetupExe_OnWifiStart          },
     {NVTEVT_EXE_WIFI_STOP,           SetupExe_OnWifiStop          },
     {NVTEVT_EXE_WIFI_SET_SSID,       SetupExe_OnWifiSetSSID       },
-//    {NVTEVT_EXE_WIFI_SET_PASSPHRASE, SetupExe_OnWifiSetPassPhrase },
+    {NVTEVT_EXE_WIFI_SET_PASSPHRASE, SetupExe_OnWifiSetPassPhrase },
     {NVTEVT_EXE_WIFI_SET_AUTHTYPE,   SetupExe_OnWifiSetAuthType   },
     {NVTEVT_EXE_WIFI_DHCP_START,     SetupExe_OnDHCPStart     },
     {NVTEVT_EXE_WIFI_REINIT,         SetupExe_OnWifiReInit     },

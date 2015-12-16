@@ -253,8 +253,8 @@ extern BOOL     GPIOMap_DetPoweroff(void);
 #define LED_GREEN_DUMMY             0
 #define LED_GREEN_BY_GPIO           1
 #define LED_GREEN_CTRL              LED_GREEN_BY_GPIO
-#define GPIO_GREEN_LED              L_GPIO_15
-#define PAD_GREEN_LED               PAD_PIN_LGPIO15
+#define GPIO_GREEN_LED              P_GPIO_43
+#define PAD_GREEN_LED               PAD_PIN_PGPIO43
 
 #define LED_FOCUS_DUMMY             0
 #define LED_FOCUS_BY_GPIO           1

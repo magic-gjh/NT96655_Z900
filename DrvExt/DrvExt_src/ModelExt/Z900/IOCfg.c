@@ -51,7 +51,7 @@ GPIO_INIT_OBJ uiGPIOMapInitTab[] = {
     {  GPIO_CARD_DETECT,        GPIO_DIR_INPUT,     PAD_PULLUP,           PAD_CARD_DETECT       },
     {  GPIO_CARD_WP,            GPIO_DIR_INPUT,     PAD_PULLUP,           PAD_CARD_WP           },
     //LCD
-    {  GPIO_LCD_BLG_PCTL,       GPIO_DIR_OUTPUT,    GPIO_SET_OUTPUT_LOW,  PAD_LCD_BLG_PCTL      },
+    //{  GPIO_LCD_BLG_PCTL,       GPIO_DIR_OUTPUT,    GPIO_SET_OUTPUT_LOW,  PAD_LCD_BLG_PCTL      },
     //LED
     {  GPIO_GREEN_LED,          GPIO_DIR_OUTPUT,    GPIO_SET_OUTPUT_LOW,  GPIO_SET_NONE         },
     //KEY
@@ -70,7 +70,7 @@ GPIO_INIT_OBJ uiGPIOMapInitTab[] = {
 	//{  GPIO_SENSOR2_DET,      GPIO_DIR_INPUT,    PAD_PULLUP,   PAD_SENSOR2_DET     },  
     //Wi-Fi power
     {  GPIO_WIFI_POWER_PWM5,    GPIO_DIR_OUTPUT,    GPIO_SET_OUTPUT_HI,   PAD_PIN_NOT_EXIST     },
-    {  GPIO_SYSTEM_STATUS,       GPIO_DIR_OUTPUT,    GPIO_SET_OUTPUT_LOW,  PAD_SYSTEM_STATUS      },    
+    {  GPIO_SYSTEM_STATUS,       GPIO_DIR_OUTPUT,    GPIO_SET_OUTPUT_HI,  PAD_SYSTEM_STATUS      },    
 #if 0
      {  GPIO_KEY_ZOOMOUT,       GPIO_DIR_INPUT,     PAD_PULLUP,           PAD_KEY_ZOOMOUT       },
      {  GPIO_KEY_ZOOMIN,        GPIO_DIR_INPUT,     PAD_PULLUP,           PAD_KEY_ZOOMIN       },
@@ -342,11 +342,13 @@ UINT32 GPIOMap_ACCDet(void)
 	return (gpio_getPin(GPIO_ACC_DET)==FALSE)?0X0A:0X0B;
 }
 
-void GPIOMap_SetSystemOnLine(BOOL En)
+void GPIOMap_SetSystemOnLine(UINT8 En)
 {
     	if(En)
         gpio_setPin(GPIO_SYSTEM_STATUS);
         else
-        gpio_clearPin(GPIO_SYSTEM_STATUS);	
+        gpio_clearPin(GPIO_SYSTEM_STATUS);
+
+		//debug_msg("gpio_getPin(GPIO_SYSTEM_STATUS) = %d\r\n",gpio_getPin(GPIO_SYSTEM_STATUS));
 }
 

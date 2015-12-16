@@ -290,6 +290,8 @@ INT32 UIFlowWndMovie_OnExeRecord(VControl *pCtrl, UINT32 paramNum, UINT32 *param
             }
 
             FlowMovie_StartRec();
+			GxLED_SetCtrl(KEYSCAN_LED_GREEN,SET_TOGGLE_LED,TRUE);            
+	        GxLED_SetCtrl(KEYSCAN_LED_GREEN,TURNON_LED,FALSE); 
             // start USB detect timer again
             if (g_ACPlug == TRUE)
                 SxTimer_SetFuncActive(SX_TIMER_DET_USB_ID, TRUE);
@@ -306,6 +308,8 @@ INT32 UIFlowWndMovie_OnExeRecord(VControl *pCtrl, UINT32 paramNum, UINT32 *param
                 Input_SetKeyMask(KEY_PRESS, FLGKEY_KEY_MASK_NULL);
                 #endif
                 FlowMovie_StopRec();
+				GxLED_SetCtrl(KEYSCAN_LED_GREEN,SET_TOGGLE_LED,FALSE);            
+	        	GxLED_SetCtrl(KEYSCAN_LED_GREEN,TURNON_LED,TRUE); 
                 // update ui window icon
                 FlowMovie_UpdateIcons(TRUE);
 
@@ -1256,13 +1260,14 @@ INT32 UIFlowWndMovie_OnTimer(VControl *pCtrl, UINT32 paramNum, UINT32 *paramArra
                 Ux_PostEvent(NVTEVT_KEY_SHUTTER2, 1, NVTEVT_KEY_PRESS);
             }
         }
-        break;		
+        break;	
+		
         case NVTEVT_DELAY_CLOSE_TIMER:
 			
-        GxLED_SetCtrl(KEYSCAN_LED_GREEN,SETLED_SPEED,3);
+        //GxLED_SetCtrl(KEYSCAN_LED_GREEN,SETLED_SPEED,3);
         GxLED_SetCtrl(KEYSCAN_LED_GREEN,SET_TOGGLE_LED,TRUE);
 		
-        Display_SetEnable(LAYER_VDO1, FALSE);
+        //Display_SetEnable(LAYER_VDO1, FALSE);
         Ux_OpenWindow(&UIMenuWndWiFiWaitCtrl, 0);
         BKG_PostEvent(NVTEVT_BKW_WIFI_ON);            
         break;		
